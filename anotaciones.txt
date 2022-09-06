@@ -1,0 +1,37 @@
+Instalamos con scoop el CLI de Symfony
+
+Instalamos el proyecto nuevo de symfony
+
+symfony new >nombre proyecto<
+
+cuando hacemos esto automaticamente nos genera un nuevo repositorio con git.
+
+para hacer el server del proyecto hacemos:
+
+symfony serve -d
+
+- RUTAS - CONTROLADORES
+
+Es controlador es un metodo dentro de una calse
+
+La clase del controlador debe cumplir ciertas reglas para que funcione
+
+. se debe llamar igual el archivo que la clase
+. el nombre de la clase/archivo debe termina siempre con Controller: NombreController
+. antes de la clase se debe declarar el namespace y en todos los casos debe ser namespace App\Controller;
+
+una vez creada la clase se empiezan a agregar los métodos. Los nombres de los métodos no importan.
+los métodos deben ir acompañados de las rutas.
+LAs rutas se declaran a través de atributos que se ponen justo arriba de los métodos de la siguiente manera:
+   #[Route("/")]
+Junto con esto siempre debemos llamar un use para activar las notaciones de symfony:
+
+   use Symfony\Component\Routing\Annotation\Route;
+
+De esta manera php va a poder intrepretar la notación de atriburo.
+Cada vez que se hace referencia a una libreria de symfony tiene que haber un use que la llame.
+
+por cada ruta que querramos crear vamos a necesitar un controlador y pero pueden esta todos dentro de la misma clase aunque deben tener funcionaes diferentes.
+
+Asi tambien si queremos que el nombre de la ruta sea dinámico y no tengamos que crear una ruta por cada grupo de elementos que queremos mostrar entonces se usa un comodin:
+{slug}
