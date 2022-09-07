@@ -56,5 +56,17 @@ No se utiliza HTML dentro de las clases php de los controladores. Lo que se hace
 
 para agregar una librerias de plantillas debemos utilizar composer
 las plantillas que tiene symfony las podemos ver en:
-composer require template
+      composer require template
 https://repo.packagist.org: ahi voy a ver la lista de paquetes.
+
+una vez instalado viene con "recetas" recipe que lo configuran automaticamente.
+
+ayuda que a la clase del controlador le heredemos el AbstractController
+A ella le debemos agregar la llamada al archivo:
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+
+class VinylController extends AbstractController {
+
+esta clase nos va a servir para varias cosas entre ellas renderizar templates.
