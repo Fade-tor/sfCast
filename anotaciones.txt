@@ -35,3 +35,26 @@ por cada ruta que querramos crear vamos a necesitar un controlador y pero pueden
 
 Asi tambien si queremos que el nombre de la ruta sea dinámico y no tengamos que crear una ruta por cada grupo de elementos que queremos mostrar entonces se usa un comodin:
 {slug}
+slug es solo una convención que se usa para url seguras pero podríamos ponder cualquier palabra dentro de las llaves que nos va a habilitar el uso de un argumento con el mismo nombre: en este caso $slug
+
+ese argumento lo podemos utilizar como una variable que pasa por get al método:
+
+%[Route('/browse/{slug}')];
+public function browse(string $slug): Response {
+   return new Response('Aguante el Millonario!);
+}
+
+es una buena práctiva tipar las variables a pesar de que el valor por defecto sea del tipo que estamos tipando.
+
+Cuando usamos un argumento comodín estamos obligados a que no esté vacío. Tiene que contener algun valor. PAra evitar esto le podemos asignar valor null por defecto y de esa manero si esta en blanco va a tomarl igual:
+
+public function browse(string $slug = null)
+
+PLANTILLAS
+
+No se utiliza HTML dentro de las clases php de los controladores. Lo que se hacer es RENDERIZAR plantillas a través de los response de los métodos.
+
+para agregar una librerias de plantillas debemos utilizar composer
+las plantillas que tiene symfony las podemos ver en:
+composer require template
+https://repo.packagist.org: ahi voy a ver la lista de paquetes.
