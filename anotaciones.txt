@@ -61,6 +61,12 @@ https://repo.packagist.org: ahi voy a ver la lista de paquetes.
 
 una vez instalado viene con "recetas" recipe que lo configuran automaticamente.
 
+**Hay que tener php 8.1 para poder tener instalado composer recipes
+una vez que esta instalado el 8.1 le damos al comando:
+   composer update
+
+Y ahora si vamos a tener instadas la librerias necesarias para seguir adelante con symfony 6
+
 ayuda que a la clase del controlador le heredemos el AbstractController
 A ella le debemos agregar la llamada al archivo:
 
