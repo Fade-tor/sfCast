@@ -76,3 +76,67 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class VinylController extends AbstractController {
 
 esta clase nos va a servir para varias cosas entre ellas renderizar templates.
+
+Agregamos al controlador el metodo de render() en el return:
+
+return this->render('vinyl/homepage.html.twig', [Array con variales que se le quieren pasar al template: 'title'=>'PB & Jams']);
+
+Se usa tener una carpeta con el nombre del controlador y archivo con el nombre del método.html.twig con el combre del método 
+
+Ahora para que haya algo que el render pueda renderisar hacemos la carpeta dentro de la carpeta templates (todos los twig van ahí) y dentro de la carpeta la nueva platilla.
+
+dentro de la plantilla twig hay que usar una syntaxis en particular:
+
+Decir algo:
+{{imprime lo que haya adentro}}
+
+funciona como javascript entonces no hace falta usar las notaciones de php como $.
+de esta forma si ponemos {{hola}} va a buscar una variable que se llame hola.
+para imprimir hola lo debemos poner entre comillas {{'hola'}}.
+
+Comentar algo:
+{# Esto sirve para comentar dentro de un template de twig #}
+
+Se usa para dejar comentarios en el archivo sin que el template los tome en cuenta.
+
+Hacer algo:
+{% aca se incluyen los IF los FOR y los SET %}
+
+Dentro de las etiquetas {# #} se agregan las sentencias usadas por ejemplo para recorrer las arrays.
+Como se dijo antes, es muy parecido a javascript entonces cuando tenemos que recorrer arrays asociativos le agregamos el ordenador al final del nombre de la variable luego de un punto:
+
+{% for track in tracks %}
+   Aca adentro va la parte que queremos que se muestre en loop. y va como html
+   {{ track.ordenador1}} - {{track.ordenador2}}
+
+{% endfor %} Todas las sentencias empiezan y terminan: endfor, endif, endset 
+
+TWIG tiene un monton de funcionalidades que pueden agregarse a la syntaxis muy facilmente:
+
+{{ track.ordenador1|upper}} converitmos el valor traido en mayusculas.
+
+Los filtros pueden encadenarse simplemente agregando |un|atrs|deotro
+
+Herencia de plantillas:
+
+las plantillas pueden heredarse de forma que el código que se repite no deba ser repetido.
+
+En la parte de arriba de nuestro archivo twig debemos incluir:
+
+{% extends 'base.html.twig' %}
+
+para que esto tenga efecto debemos decirle a twig en qué parte queremos que se embeba nuestro nuevo codigo.
+
+para eso la plantilla mayo lleva "bloques" dentro y cada bloque tiene un nombre.
+solo debemos "encerrar" nuestro código en el bloque en el que lo queremos incluir:
+
+{% block body%}
+
+{% endblock %}
+
+PERFILADOR: 
+
+
+
+
+
