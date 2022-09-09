@@ -136,6 +136,51 @@ solo debemos "encerrar" nuestro código en el bloque en el que lo queremos inclu
 
 PERFILADOR: 
 
+Instalar el paquete
+
+   composer require debug//// No funciona asi que hay que correrlo completo: composer require symfony/debug-pack
+
+esto instala una barra de debug en nuetro server local.
+
+Tambien nos permite ver que hay dentro de una variable agregando un metodo al controlador:
+
+dd($variable);
+Esto va a romper la ejecusion y mostrarnos exactamente que hay dentro de esa variable.
+
+Hay otra forma de hacer lo mismo sin que se rompa la ejecución:
+
+dump($variable);
+
+Esto agrega un icono de mira a la barra de debug del servidor y alli nos muestra la info de la variable.
+Esta segunda opción tambien se puede usar en twig {{ dump($variable) }} y si no le ponemos una variable nos muestra de todas las que se esten ejecutando en twig.
+
+CSS
+
+copiamos las imagenes y las agregamos a la carpeta public porque si no no se pueden ver desde el explorador.
+El archivo css tambien se agrega en public. creamos una carpeta styles dentro de public y ponemos allí nuestros archivos de css.
+la carpeta public es la carpeta base de nuestra página porque el index está ahi y todo pasa por el index. De esta forma no hace falta aclararlo en la ruta a la hora de estilos:
+/styles/app.CSS
+
+
+ASSET
+
+empezamos a usar assets
+para ello debemos instalar la librería:
+
+   composer require symfony/asset
+
+la funcion asset lo que hace es detectar automaticamente donde se encuentran nuestros archivos de recursos.
+De esta manera nos permite no tener que aclarar exactamente la ruta sino solo la carpeta y ekl nombre del archivo.
+
+
+minuto 9 de activos Css ....
+
+
+
+
+
+
+
 
 
 
