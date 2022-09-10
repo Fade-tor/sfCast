@@ -1,4 +1,4 @@
-Instalamos con scoop el CLI de Symfony
+dInstalamos con scoop el CLI de Symfony
 
 Instalamos el proyecto nuevo de symfony
 
@@ -171,9 +171,75 @@ para ello debemos instalar la librería:
 
 la funcion asset lo que hace es detectar automaticamente donde se encuentran nuestros archivos de recursos.
 De esta manera nos permite no tener que aclarar exactamente la ruta sino solo la carpeta y ekl nombre del archivo.
+Sirve para todos los archivos que se convoquen.
+
+arreglamos en el controlador y renderisamos en la salida el browse y le agregamos la variable en la que almacenamos el género.
+
+usamos una sintaxis rara:
+
+$genre = $slug ? u(str_replace('-', ' ', $slug))->title(true): null;
+
+el primer ? es en realidad un if que cuya condicion es la que esta justo antes, en este caso $slug.
+La funcion u(convierte todo lo que venga a string) y str_replace() es para reemplar un tipo de cartér por otro.
+Al final los : son el else de la sentencia if y lo que venga despues de los : será lo que sea tomado si la condicion if no se cumple.
+
+URL - INTERACCIÓN CON NUESTRA APPLIC
+Si ponemos en la consola php bin/console nos salen todas las opciones que podemos hacer con esa fincion
+por ejemplo ejecutamos: 
+
+php bin/console debug:router
+
+nos muestra el listado de rutas que se recorrieron.
+
+asi que ahora vamos a genera la urls asociadaas a las rutas, esta es una funcion que symfony realiza automaticament pero podemos tomar control de ello estableciendo nombres a las rutas.
+
+#[Route('/browse/{slug}', name:'app_browse_genre')]
+
+#[Route('/', name:'app_homepage')]
+
+le agregamos al atributo Route un segundo valor con name:''.
+
+pata llamar esta ruta por su nemobre usamos la sintaxis de echo y el metodo path:
+   {{path('nombre de la ruta')}}
+
+RUTAS con parametros
+
+el metodo path puede recibir un segunda parámetro en forma de array asociativo ({}):
+
+   {{path('nombre de la ruta', {clave: 'valor'})}}
+
+API JSON
+
+Vamos a crear una ruta para una API JSON.
+
+hacemos un nuevo controlador exclusivo para la API
+ a la ruta le agregamos un parametro comodin:
+
+      #[Route('/api/song/{comodin}')].
+
+ El comodín nos habilita a pasar argunmentos a la funcion del controlador:
+
+      public function apiControlador($comodin) {
+         dd($comodin); //probamos si esta pasando bien el responde con el metodo de debug dd().
+      }
 
 
-minuto 9 de activos Css ....
+
+ Asimismo le vamos a asigna un metodo de entrada de datos para que no esté abierto como vien por defecto:
+
+      #[Route('/api/song/{comodin}', methods: ['GET', 'POST', 'PUT'])]
+
+de esta manera limitamos la forma en que queremos que ingresen los datos a nuestro controlador.
+
+lo probamos con una funcion de bin/console
+
+php bin/console router:match /api/songs/11
+
+como le asignamos el tipo int a la variable comodin podemos recibir un error si por GET nos pasan un valor de otro tipo. Por esta razón debemos delimitar nuetro comodin para que solo pueda recibir valores del tipo int y para ello se una una expresión regular que indica que solo puede recibir valores int de cualquier dígito:
+   /api/song/{comodin<\d+>} nótese que va con barra invertida.
+
+OBJETOS DE SERVICIO
+
 
 
 

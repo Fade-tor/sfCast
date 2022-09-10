@@ -10,7 +10,7 @@ use function Symfony\Component\String\u;
 
 class VinylController extends AbstractController {
 
-    #[Route('/')]
+    #[Route('/', name:'app_homepage')]
     public function homepage(): Response
     {
         $tracks = [
@@ -30,15 +30,13 @@ class VinylController extends AbstractController {
         //return $this->render('$0.html.twig', []);
     }
 
-    #[Route('/browse/{slug}')]
-    public function browse(string $slug = null): Response{   
-        if ($slug) {
+    #[Route('/browse/{slug}', name:'app_browse')]
+    public function browse(string $slug = null): Response{ 
 
-        $title = 'Genero: '.u(str_replace('-', ' ', $slug))->title(true);
-        } else {
-            $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true): null;
-        }
-       return $this->render('browse.html.twig',);
+        $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true): null; 
+        //esta es otra forma de intaxis del if: ?=if -- :=else;
+
+       return $this->render('vinyl/browse.html.twig', ['genre'=>$genre,]);
 }
 }
 ?>
