@@ -240,6 +240,29 @@ como le asignamos el tipo int a la variable comodin podemos recibir un error si 
 
 OBJETOS DE SERVICIO
 
+Los servicios son objetos/herramientas que está a nuestra disposición para ser usadas.
+
+usamos el comando php bin/console debug:autowiring
+
+Ahi nos muestra todos los servicios que tenemos a disposición.
+Usamos uno: LoggerInterface
+
+ public function getSong(int $id, LoggerInterface $logger): Response //Le agregamos el int al argumento para que siempre lo convierta en integer. // Le agregamos el servicio de LoggrInterface.
+    {
+        $song = [
+            'song' => $id,
+            'name' => 'Waterfalls',
+            'url' => 'http://symfonycasts.s3.amazonaws.com/sample.mp3',
+        ];
+
+        $logger->info('Devolviendo respuesta API pra la cansión {song}'.[ //Acá lo que hacemos es pasarle al comodin 'song' el valor que venga con la variable id.
+            'song' => $id,
+        ]);
+
+        return new JsonResponse($song);
+
+CONFIGURACIÓN  DE WEBPACK ENCORE
+
 
 
 
