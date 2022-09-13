@@ -263,6 +263,20 @@ Usamos uno: LoggerInterface
 
 CONFIGURACIÓN  DE WEBPACK ENCORE
 
+Es un minificador de CSS, Font, JS, etc
+
+se instala con:
+
+composer require encore o composer require symfony/webpack-encore-bundle
+
+una vez instalada la librería instalamos node:
+
+npm install
+
+Esto termina de instalar el webpack encore.
+
+EMPAQUETAR JS y CSS CON Encore
+
 
 
 
