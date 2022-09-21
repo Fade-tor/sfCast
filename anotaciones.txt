@@ -1,18 +1,40 @@
-dInstalamos con scoop el CLI de Symfony
+---INSTALACIÓN Y CREACIÓN DE PROYECTO SYMFONY-----
+
+Instalamos scoop
+
+Instalamos con scoop el CLI de Symfony
 
 Instalamos el proyecto nuevo de symfony
 
-symfony new >nombre proyecto<
+   symfony new >nombre proyecto<
 
 cuando hacemos esto automaticamente nos genera un nuevo repositorio con git.
 
 para hacer el server del proyecto hacemos:
 
-symfony serve -d
+   symfony serve -d
 
-- RUTAS - CONTROLADORES
 
-Es controlador es un metodo dentro de una calse
+----- CONOCIENDO EL PROYECTO ------
+Todo lo que querramos que sea visible en pantalla debe estar adento de la carpeta public de nuestro proyecto
+CSS JS Imágenes ... etc
+
+Todas nuestras clases y código de control del proyecto va a estar en la carpeta SRC
+
+En la carpeta config estan los archivos de configuración del nuestro proyecto
+
+
+---- RUTAS - CONTROLADORES -----
+
+Las rutas son flechas que apuntan a controladores que son los que generan nuestras páginas
+
+   Ruta -> controlador -> página
+
+El controlador es un metodo dentro de una calse
+
+en el archivo de la clase debe llamarse al namespace correspondiente para que funciones:
+
+      namespace App\Controller;
 
 La clase del controlador debe cumplir ciertas reglas para que funcione
 
@@ -22,8 +44,11 @@ La clase del controlador debe cumplir ciertas reglas para que funcione
 
 una vez creada la clase se empiezan a agregar los métodos. Los nombres de los métodos no importan.
 los métodos deben ir acompañados de las rutas.
+Los métodos deben siempre devolver un response. No necesariamente con esa respuesta pero si alguna instancia de esa clase.
 LAs rutas se declaran a través de atributos que se ponen justo arriba de los métodos de la siguiente manera:
+
    #[Route("/")]
+
 Junto con esto siempre debemos llamar un use para activar las notaciones de symfony:
 
    use Symfony\Component\Routing\Annotation\Route;
@@ -40,24 +65,29 @@ slug es solo una convención que se usa para url seguras pero podríamos ponder 
 ese argumento lo podemos utilizar como una variable que pasa por get al método:
 
 %[Route('/browse/{slug}')];
-public function browse(string $slug): Response {
-   return new Response('Aguante el Millonario!);
-}
+      public function browse(string $slug): Response {
+         return new Response('Aguante el Millonario!);
+      }
 
 es una buena práctiva tipar las variables a pesar de que el valor por defecto sea del tipo que estamos tipando.
 
 Cuando usamos un argumento comodín estamos obligados a que no esté vacío. Tiene que contener algun valor. PAra evitar esto le podemos asignar valor null por defecto y de esa manero si esta en blanco va a tomarl igual:
 
-public function browse(string $slug = null)
+      public function browse(string $slug = null)
 
-PLANTILLAS
+No es necesario que el orden en que aparecen los comodines en la ruta sea el orden en que aparecen en el método
+
+
+---------- PLANTILLAS // TEMPLATES // TWIG ----------
 
 No se utiliza HTML dentro de las clases php de los controladores. Lo que se hacer es RENDERIZAR plantillas a través de los response de los métodos.
 
 para agregar una librerias de plantillas debemos utilizar composer
 las plantillas que tiene symfony las podemos ver en:
+
       composer require template
-https://repo.packagist.org: ahi voy a ver la lista de paquetes.
+
+      https://repo.packagist.org: ahi voy a ver la lista de paquetes.
 
 una vez instalado viene con "recetas" recipe que lo configuran automaticamente.
 
@@ -85,6 +115,8 @@ Se usa tener una carpeta con el nombre del controlador y archivo con el nombre d
 
 Ahora para que haya algo que el render pueda renderisar hacemos la carpeta dentro de la carpeta templates (todos los twig van ahí) y dentro de la carpeta la nueva platilla.
 
+
+-------- TWIG - SINTAXIS  -------------------
 dentro de la plantilla twig hay que usar una syntaxis en particular:
 
 Decir algo:
@@ -101,6 +133,7 @@ Se usa para dejar comentarios en el archivo sin que el template los tome en cuen
 
 Hacer algo:
 {% aca se incluyen los IF los FOR y los SET %}
+{%endfor, endif, enset %} //Todas las estiquetas {% %} deben cerrarse
 
 Dentro de las etiquetas {# #} se agregan las sentencias usadas por ejemplo para recorrer las arrays.
 Como se dijo antes, es muy parecido a javascript entonces cuando tenemos que recorrer arrays asociativos le agregamos el ordenador al final del nombre de la variable luego de un punto:
@@ -111,13 +144,18 @@ Como se dijo antes, es muy parecido a javascript entonces cuando tenemos que rec
 
 {% endfor %} Todas las sentencias empiezan y terminan: endfor, endif, endset 
 
+------- TWIG - FUNCIONALIDADAS ------------------------------------
+   twig.symfony.com
+
 TWIG tiene un monton de funcionalidades que pueden agregarse a la syntaxis muy facilmente:
 
 {{ track.ordenador1|upper}} converitmos el valor traido en mayusculas.
 
-Los filtros pueden encadenarse simplemente agregando |un|atrs|deotro
+Los filtros pueden encadenarse simplemente agregando |un|atras|deotro
 
 Herencia de plantillas:
+
+-------- TWIG - HERENCIA ----------------------------
 
 las plantillas pueden heredarse de forma que el código que se repite no deba ser repetido.
 
@@ -134,9 +172,10 @@ solo debemos "encerrar" nuestro código en el bloque en el que lo queremos inclu
 
 {% endblock %}
 
-PERFILADOR: 
+ 
+-------- PERFILADOR: ----------------- 
 
-Instalar el paquete
+Instalar el paquete - Es mejor que una herramienta como este caso se instale con require-dev para que este solo disponible para desarroollo-
 
    composer require debug//// No funciona asi que hay que correrlo completo: composer require symfony/debug-pack
 
